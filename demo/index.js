@@ -9,8 +9,8 @@ let urls = [
 
 let move = mChange.makeMatrixChange(app, {
   images: urls,
-  row: 7,
-  col: 9
+  row: 6,
+  col: 6
 });
 
 function getRandom(min, max) {
@@ -112,11 +112,18 @@ new Vue({
   },
   methods: {
     start() {
+      let num=getRandom(0, mChange.mode.length - 1);
       move.movePoint(mChange.mode[getRandom(0, mChange.mode.length - 1)], {
         animate: true,
-        classNameIn: 'animated ' + this.inSelect,
-        classNameOut: 'animated ' + this.outSelect
+        classNameIn: 'animated ' +this.inList[num],
+        classNameOut: 'animated ' + this.outList[num]
       });
     }
+  },
+  created:function () {
+    var that=this;
+    setInterval(function(){
+      that.start();
+    },8000)
   }
 });
